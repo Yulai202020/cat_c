@@ -1,19 +1,27 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
+
     if (argc < 2) {
-        printf("Please enter file name.");
-        return 0;
+        while (1) {
+            char string[1024];
+            fgets(string, 1024, stdin);
+            printf(string);
+        }
+    } else {
+        for (int i = 1; i < argc; i++) {
+            FILE *ptr;
+            char* filename = argv[i];
+            ptr = fopen(filename, "r");
+            
+            char buffer[1024];
+            while(fgets(buffer, 1024, ptr)) {
+                printf("%s", buffer);
+            }
+
+            fclose(ptr);
+        }
     }
 
-    FILE *ptr;
-    ptr = fopen(argv[1], "r");
-
-    char myString[100];
-    while(fgets(myString, 100, ptr)) {
-        printf("%s", myString);
-    }
-
-    fclose(ptr);
     return 0;
 }
