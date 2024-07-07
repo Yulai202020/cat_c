@@ -10,9 +10,8 @@ int main(int argc, char* argv[]) {
         }
     } else {
         for (int i = 1; i < argc; i++) {
-            FILE *ptr;
             char* filename = argv[i];
-            ptr = fopen(filename, "r");
+            FILE *ptr = fopen(filename, "r");
             
             char buffer[1024];
             while(fgets(buffer, 1024, ptr)) {
@@ -20,6 +19,9 @@ int main(int argc, char* argv[]) {
             }
 
             fclose(ptr);
+
+            free(filename);
+            free(ptr);
         }
     }
 
